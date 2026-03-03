@@ -6,7 +6,12 @@
   <title>Franny McGirr — Vocalist & Performer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <!--
+    Fraunces  — playful optical serif for headings (h1, h2, h3)
+    Cormorant Garamond italic — labels, tagline, nav (elegant complement)
+    DM Sans   — body copy
+  -->
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,700&family=Cormorant+Garamond:ital,wght@1,400;1,600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
     /* ── Reset & base ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -25,14 +30,15 @@
 
     body {
       font-family: 'DM Sans', sans-serif;
+      font-size: 18px;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.7;
+      line-height: 1.75;
     }
 
     h1, h2, h3 {
-      font-family: 'Cormorant Garamond', serif;
-      line-height: 1.2;
+      font-family: 'Fraunces', serif;
+      line-height: 1.15;
     }
 
     a { color: inherit; text-decoration: none; }
@@ -55,22 +61,25 @@
       list-style: none;
       display: flex;
       flex-wrap: wrap;
-      gap: 0.5rem 1.5rem;
+      gap: 0.5rem 2rem;
       justify-content: center;
     }
 
     nav a {
-      font-size: 0.875rem;
-      font-weight: 500;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-style: italic;
+      font-weight: 600;
       color: var(--text);
-      padding: 0.25rem 0.5rem;
-      border-radius: 6px;
-      transition: color 0.2s, background 0.2s;
+      padding: 0.2rem 0.25rem;
+      letter-spacing: 0.02em;
+      border-bottom: 1px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
     }
 
     nav a:hover {
       color: var(--accent);
-      background: rgba(201, 160, 220, 0.1);
+      border-bottom-color: var(--accent);
     }
 
     /* ── Sections ── */
@@ -80,20 +89,31 @@
       margin: 0 auto;
     }
 
-    .section-label {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
+    .divider {
+      text-align: center;
       color: var(--accent);
-      margin-bottom: 0.75rem;
+      font-size: 1.1rem;
+      letter-spacing: 0.5em;
+      opacity: 0.45;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .section-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-style: italic;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
     }
 
     .section-title {
-      font-size: clamp(2rem, 5vw, 3rem);
-      font-weight: 700;
-      margin-bottom: 1.5rem;
+      font-size: clamp(2.5rem, 6vw, 3.8rem);
+      font-weight: 900;
+      margin-bottom: 1.75rem;
     }
 
     /* ── Buttons ── */
@@ -101,17 +121,17 @@
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      padding: 0.75rem 1.75rem;
+      padding: 0.8rem 2rem;
       border-radius: 50px;
       font-family: 'DM Sans', sans-serif;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       font-weight: 600;
       cursor: pointer;
-      transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s;
+      transition: transform 0.15s, box-shadow 0.15s;
       border: none;
     }
 
-    .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,160,220,0.35); }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,160,220,0.4); }
     .btn:active { transform: translateY(0); }
 
     .btn-primary {
@@ -131,75 +151,105 @@
        1. HERO
     ───────────────────────────────── */
     #hero {
-      text-align: center;
-      padding-top: 6rem;
-      padding-bottom: 6rem;
+      position: relative;
+      overflow: hidden;
+      padding-top: 5rem;
+      padding-bottom: 5rem;
+      /* remove inherited text-align:center — handled per element */
+    }
+
+    /* decorative SVG background */
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* flex row: image left, text right */
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: 3.5rem;
     }
 
     .headshot {
-      width: 200px;
-      height: 200px;
+      width: 260px;
+      height: 260px;
       border-radius: 50%;
-      margin: 0 auto 2rem;
+      flex-shrink: 0;
       background: linear-gradient(135deg, var(--accent), var(--accent2));
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 3.5rem;
-      font-weight: 700;
+      font-family: 'Fraunces', serif;
+      font-size: 4.5rem;
+      font-weight: 900;
       color: #fff;
-      box-shadow: 0 8px 32px rgba(201,160,220,0.4);
+      box-shadow: 0 14px 52px rgba(201,160,220,0.5);
       overflow: hidden;
-      flex-shrink: 0;
+      /* slight tilt for playfulness */
+      transform: rotate(-2deg);
+    }
+
+    .hero-text {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
     }
 
     #hero h1 {
-      font-size: clamp(2.8rem, 8vw, 5rem);
-      font-weight: 700;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 900;
+      /* optical size: large */
+      font-variation-settings: 'opsz' 144;
       background: linear-gradient(135deg, #9b6dba, var(--accent2));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      margin-bottom: 0.75rem;
+      line-height: 1.05;
     }
 
     .tagline {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.1rem, 3vw, 1.4rem);
+      font-size: clamp(1.2rem, 2.5vw, 1.55rem);
       font-style: italic;
       color: #7a6a7a;
-      margin-bottom: 2rem;
-      letter-spacing: 0.03em;
+      letter-spacing: 0.04em;
+      line-height: 1.5;
     }
 
     /* ─────────────────────────────────
        2. ABOUT
     ───────────────────────────────── */
     #about {
-      border-top: 1px solid rgba(201,160,220,0.2);
+      padding-top: 4rem;
     }
 
-    .about-card {
-      background: var(--card-bg);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 2.5rem;
+    .about-body {
       display: flex;
       flex-direction: column;
-      gap: 1.5rem;
+      gap: 1.25rem;
     }
 
-    .about-card p {
+    .about-body p {
       font-size: 1.05rem;
       max-width: 68ch;
+      color: #4a3f4a;
+      text-align: justify;
+      hyphens: auto;
     }
 
     /* ─────────────────────────────────
        3. PERFORMANCES
     ───────────────────────────────── */
     #performances {
-      border-top: 1px solid rgba(201,160,220,0.2);
+      padding-top: 4rem;
     }
 
     .video-grid {
@@ -216,7 +266,39 @@
       border-radius: var(--radius);
       overflow: hidden;
       box-shadow: var(--shadow);
+      cursor: pointer;
+      background: #000;
     }
+
+    .video-wrapper img.yt-thumb {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity 0.2s;
+      display: block;
+    }
+
+    .video-wrapper:hover img.yt-thumb { opacity: 0.85; }
+
+    .yt-play {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .yt-play svg {
+      width: 68px;
+      height: 68px;
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
+      transition: transform 0.15s;
+    }
+
+    .video-wrapper:hover .yt-play svg { transform: scale(1.1); }
 
     .video-wrapper iframe {
       position: absolute;
@@ -235,92 +317,80 @@
        4. TIMELINE
     ───────────────────────────────── */
     #timeline {
-      border-top: 1px solid rgba(201,160,220,0.2);
+      padding-top: 4rem;
     }
 
     .timeline {
       position: relative;
-      padding-left: 2.5rem;
+      padding-left: 2.75rem;
       margin-top: 1rem;
     }
 
-    /* vertical line */
     .timeline::before {
       content: '';
       position: absolute;
-      left: 0.75rem;
+      left: 0.65rem;
       top: 0.5rem;
       bottom: 0.5rem;
       width: 2px;
       background: linear-gradient(to bottom, var(--accent), var(--accent2));
       border-radius: 2px;
+      opacity: 0.5;
     }
 
     .timeline-item {
       position: relative;
-      margin-bottom: 1.75rem;
+      margin-bottom: 2rem;
     }
 
     .timeline-item:last-child { margin-bottom: 0; }
 
-    /* dot */
     .timeline-item::before {
       content: '';
       position: absolute;
-      left: -1.8rem;
-      top: 0.6rem;
-      width: 12px;
-      height: 12px;
+      left: -2.15rem;
+      top: 0.7rem;
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
-      background: var(--accent);
+      background: var(--accent2);
       border: 2px solid var(--bg);
-      box-shadow: 0 0 0 2px var(--accent);
-    }
-
-    .timeline-card {
-      background: var(--card-bg);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 1rem 1.5rem;
-      display: flex;
-      align-items: baseline;
-      gap: 1rem;
-      transition: transform 0.15s, box-shadow 0.15s;
-    }
-
-    .timeline-card:hover {
-      transform: translateX(4px);
-      box-shadow: 0 6px 28px rgba(201,160,220,0.18);
+      box-shadow: 0 0 0 2px var(--accent2);
     }
 
     .timeline-year {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.25rem;
+      font-family: 'Fraunces', serif;
+      font-size: 1.2rem;
       font-weight: 700;
+      font-variation-settings: 'opsz' 9;
       color: var(--accent);
-      white-space: nowrap;
-      min-width: 3rem;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.1rem;
     }
 
     .timeline-achievement {
-      font-size: 0.95rem;
+      font-size: 1.05rem;
       font-weight: 500;
+      color: var(--text);
+      line-height: 1.4;
     }
 
     /* ─────────────────────────────────
        5. CONTACT
     ───────────────────────────────── */
     #contact {
-      border-top: 1px solid rgba(201,160,220,0.2);
+      padding-top: 4rem;
       text-align: center;
     }
 
     #contact .section-title { margin-bottom: 0.5rem; }
 
     .contact-subtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.25rem;
       color: #7a6a7a;
-      margin-bottom: 2.5rem;
-      font-size: 1rem;
+      margin-bottom: 2.75rem;
     }
 
     .contact-buttons {
@@ -334,10 +404,10 @@
       display: inline-flex;
       align-items: center;
       gap: 0.6rem;
-      padding: 0.7rem 1.4rem;
+      padding: 0.75rem 1.5rem;
       border-radius: 50px;
       font-family: 'DM Sans', sans-serif;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       font-weight: 600;
       cursor: pointer;
       transition: transform 0.15s, box-shadow 0.15s;
@@ -347,29 +417,19 @@
 
     .contact-btn:hover {
       transform: translateY(-3px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.14);
     }
 
-    .contact-btn svg {
-      width: 20px;
-      height: 20px;
-      flex-shrink: 0;
-    }
+    .contact-btn svg { width: 20px; height: 20px; flex-shrink: 0; }
 
     .btn-instagram {
       background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
       color: #fff;
     }
 
-    .btn-tiktok {
-      background: #010101;
-      color: #fff;
-    }
+    .btn-tiktok { background: #010101; color: #fff; }
 
-    .btn-youtube {
-      background: #ff0000;
-      color: #fff;
-    }
+    .btn-youtube { background: #ff0000; color: #fff; }
 
     .btn-email {
       background: var(--card-bg);
@@ -383,9 +443,11 @@
     ───────────────────────────────── */
     footer {
       text-align: center;
-      padding: 2rem 1.5rem;
+      padding: 2.5rem 1.5rem;
       border-top: 1px solid rgba(201,160,220,0.2);
-      font-size: 0.85rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1rem;
       color: #9a8a9a;
     }
 
@@ -393,17 +455,25 @@
        RESPONSIVE
     ───────────────────────────────── */
     @media (max-width: 640px) {
+      body { font-size: 17px; }
+
       section { padding: 3.5rem 1.25rem; }
 
-      .video-grid {
-        grid-template-columns: 1fr;
+      /* stack hero vertically on mobile, re-centre */
+      .hero-inner {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 2rem;
       }
 
-      .about-card { padding: 1.75rem; }
+      .hero-text { align-items: center; }
+
+      .headshot { width: 200px; height: 200px; font-size: 3.5rem; }
+
+      .video-grid { grid-template-columns: 1fr; }
 
       .timeline { padding-left: 2rem; }
-
-      .timeline-card { flex-direction: column; gap: 0.25rem; }
     }
   </style>
 </head>
@@ -424,24 +494,57 @@
        1. HERO
   ──────────────────────────────────── -->
   <section id="hero">
-    <!-- Replace the div below with an <img> once you have a real headshot:
-         <img src="headshot.jpg" alt="Franny McGirr" class="headshot" style="object-fit:cover;" /> -->
-    <div class="headshot" aria-label="Franny McGirr initials placeholder">FM</div>
 
-    <h1>Franny McGirr</h1>
-    <p class="tagline">Vocalist &middot; Musical Director &middot; Performer</p>
+    <!-- Decorative background shapes -->
+    <svg class="hero-bg" viewBox="0 0 1200 560" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <!-- large soft blobs -->
+      <circle cx="1080" cy="60"  r="230" fill="#c9a0dc" opacity="0.10"/>
+      <circle cx="980"  cy="480" r="160" fill="#f4a7b9" opacity="0.10"/>
+      <circle cx="60"   cy="490" r="120" fill="#c9a0dc" opacity="0.09"/>
+      <circle cx="420"  cy="30"  r="80"  fill="#f4a7b9" opacity="0.10"/>
+      <!-- small floating dots -->
+      <circle cx="270"  cy="95"  r="7"   fill="#c9a0dc" opacity="0.35"/>
+      <circle cx="760"  cy="130" r="5"   fill="#f4a7b9" opacity="0.45"/>
+      <circle cx="1130" cy="310" r="9"   fill="#f4a7b9" opacity="0.25"/>
+      <circle cx="90"   cy="180" r="5"   fill="#c9a0dc" opacity="0.40"/>
+      <circle cx="580"  cy="490" r="7"   fill="#c9a0dc" opacity="0.28"/>
+      <circle cx="850"  cy="420" r="5"   fill="#f4a7b9" opacity="0.30"/>
+      <circle cx="1020" cy="200" r="4"   fill="#c9a0dc" opacity="0.30"/>
+      <circle cx="340"  cy="430" r="6"   fill="#f4a7b9" opacity="0.22"/>
+      <!-- sparkle: 4-pointed stars -->
+      <path d="M870,155 l4,10 l10,4 l-10,4 l-4,10 l-4,-10 l-10,-4 l10,-4 Z"  fill="#c9a0dc" opacity="0.50"/>
+      <path d="M185,330 l3,8  l8,3  l-8,3  l-3,8  l-3,-8  l-8,-3  l8,-3  Z"   fill="#f4a7b9" opacity="0.45"/>
+      <path d="M650,70  l3,8  l8,3  l-8,3  l-3,8  l-3,-8  l-8,-3  l8,-3  Z"   fill="#f4a7b9" opacity="0.38"/>
+      <path d="M1100,430 l3,8 l8,3  l-8,3  l-3,8  l-3,-8  l-8,-3  l8,-3  Z"   fill="#c9a0dc" opacity="0.35"/>
+      <path d="M460,490 l2,6  l6,2  l-6,2  l-2,6  l-2,-6  l-6,-2  l6,-2  Z"   fill="#c9a0dc" opacity="0.30"/>
+      <!-- subtle wavy lines hinting at musical staff -->
+      <path d="M0,390 Q200,370 400,390 Q600,410 800,390 Q1000,370 1200,390" stroke="#c9a0dc" stroke-width="1.5" fill="none" opacity="0.13"/>
+      <path d="M0,415 Q200,395 400,415 Q600,435 800,415 Q1000,395 1200,415" stroke="#f4a7b9" stroke-width="1"   fill="none" opacity="0.10"/>
+    </svg>
 
-    <a
-      class="btn btn-primary"
-      href="https://docs.google.com/forms/d/e/1FAIpQLSdbBF7EpIIW4PdhOTXle-tfB_I47f36q_tAHD41muyt7OmJLw/viewform"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <!-- calendar icon -->
-      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-      Book a Gig
-    </a>
+    <div class="hero-inner">
+      <!-- Replace the div below with an <img> once you have a real headshot:
+           <img src="headshot.jpg" alt="Franny McGirr" class="headshot" style="object-fit:cover;" /> -->
+      <div class="headshot" aria-label="Franny McGirr initials placeholder">FM</div>
+
+      <div class="hero-text">
+        <h1>Franny McGirr</h1>
+        <p class="tagline">Vocalist &middot; Musical Director &middot; Performer</p>
+        <a
+          class="btn btn-primary"
+          href="https://docs.google.com/forms/d/e/1FAIpQLSdbBF7EpIIW4PdhOTXle-tfB_I47f36q_tAHD41muyt7OmJLw/viewform"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Book a Gig
+        </a>
+      </div>
+    </div>
+
   </section>
+
+  <div class="divider" aria-hidden="true">✦ &nbsp; ✦ &nbsp; ✦</div>
 
   <!-- ────────────────────────────────
        2. ABOUT
@@ -450,7 +553,7 @@
     <p class="section-label">About Me</p>
     <h2 class="section-title">A Little About Franny</h2>
 
-    <div class="about-card">
+    <div class="about-body">
       <p>
         Hi, I'm Franny — a vocalist, musical director, and performer based in the UK.
         I hold a BA in Music from the University of Bristol, a PGCE in Music Education from the
@@ -477,6 +580,8 @@
     </div>
   </section>
 
+  <div class="divider" aria-hidden="true">✦ &nbsp; ✦ &nbsp; ✦</div>
+
   <!-- ────────────────────────────────
        3. PERFORMANCES
   ──────────────────────────────────── -->
@@ -484,32 +589,47 @@
     <p class="section-label">Watch &amp; Listen</p>
     <h2 class="section-title">Performances</h2>
 
-    <!--
-      HOW TO ADD REAL VIDEOS:
-      1. Go to the YouTube video you want to embed.
-      2. Copy the part after "?v=" in the URL — that's the video ID (11 characters, e.g. dQw4w9WgXcQ).
-      3. Replace YOUTUBE_VIDEO_ID_1 and YOUTUBE_VIDEO_ID_2 below with your real video IDs.
-      Example src: "https://www.youtube.com/embed/dQw4w9WgXcQ"
-    -->
     <div class="video-grid">
-      <div class="video-wrapper">
-        <iframe
-          src="https://www.youtube.com/embed/JM70EzcVY6Y"
-          title="Franny McGirr performance 1"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen
-          loading="lazy"
-        ></iframe>
+      <!-- Video 1 -->
+      <div
+        class="video-wrapper"
+        data-video-id="JM70EzcVY6Y"
+        role="button"
+        tabindex="0"
+        aria-label="Play Franny McGirr performance video 1"
+      >
+        <img
+          class="yt-thumb"
+          src="https://img.youtube.com/vi/JM70EzcVY6Y/maxresdefault.jpg"
+          alt="Franny McGirr performance 1 thumbnail"
+        />
+        <div class="yt-play" aria-hidden="true">
+          <svg viewBox="0 0 68 68" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.55)"/>
+            <polygon points="27,20 54,34 27,48" fill="#ffffff"/>
+          </svg>
+        </div>
       </div>
 
-      <div class="video-wrapper">
-        <iframe
-          src="https://www.youtube.com/embed/mOD8z9UqfrY"
-          title="Franny McGirr performance 2"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen
-          loading="lazy"
-        ></iframe>
+      <!-- Video 2 -->
+      <div
+        class="video-wrapper"
+        data-video-id="mOD8z9UqfrY"
+        role="button"
+        tabindex="0"
+        aria-label="Play Franny McGirr performance video 2"
+      >
+        <img
+          class="yt-thumb"
+          src="https://img.youtube.com/vi/mOD8z9UqfrY/maxresdefault.jpg"
+          alt="Franny McGirr performance 2 thumbnail"
+        />
+        <div class="yt-play" aria-hidden="true">
+          <svg viewBox="0 0 68 68" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="34" cy="34" r="34" fill="rgba(0,0,0,0.55)"/>
+            <polygon points="27,20 54,34 27,48" fill="#ffffff"/>
+          </svg>
+        </div>
       </div>
     </div>
 
@@ -520,12 +640,13 @@
         target="_blank"
         rel="noopener noreferrer"
       >
-        <!-- YouTube icon -->
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3.01 3.01 0 0 0-2.12-2.13C19.55 3.6 12 3.6 12 3.6s-7.55 0-9.38.47A3.01 3.01 0 0 0 .5 6.2C.03 8.04 0 12 0 12s.03 3.96.5 5.8a3.01 3.01 0 0 0 2.12 2.13C4.45 20.4 12 20.4 12 20.4s7.55 0 9.38-.47a3.01 3.01 0 0 0 2.12-2.13C23.97 15.96 24 12 24 12s-.03-3.96-.5-5.8zM9.6 15.6V8.4l6.4 3.6-6.4 3.6z"/></svg>
         More on YouTube
       </a>
     </div>
   </section>
+
+  <div class="divider" aria-hidden="true">✦ &nbsp; ✦ &nbsp; ✦</div>
 
   <!-- ────────────────────────────────
        4. CAREER TIMELINE
@@ -537,70 +658,54 @@
     <div class="timeline" role="list">
 
       <div class="timeline-item" role="listitem">
-        <div class="timeline-card">
-          <span class="timeline-year">2015</span>
-          <span class="timeline-achievement">Diploma LCM Musical Theatre</span>
-        </div>
+        <p class="timeline-year">2015</p>
+        <p class="timeline-achievement">Diploma LCM Musical Theatre</p>
       </div>
 
       <div class="timeline-item" role="listitem">
-        <div class="timeline-card">
-          <span class="timeline-year">2017</span>
-          <span class="timeline-achievement">ABRSM Grade 8 Singing</span>
-        </div>
+        <p class="timeline-year">2017</p>
+        <p class="timeline-achievement">ABRSM Grade 8 Singing</p>
       </div>
 
       <div class="timeline-item" role="listitem">
-        <div class="timeline-card">
-          <span class="timeline-year">2020</span>
-          <span class="timeline-achievement">Musical Director, Bristol Suspensions (Award-Winning A Cappella Group)</span>
-        </div>
+        <p class="timeline-year">2020</p>
+        <p class="timeline-achievement">Musical Director, Bristol Suspensions (Award-Winning A Cappella Group)</p>
       </div>
 
       <div class="timeline-item" role="listitem">
-        <div class="timeline-card">
-          <span class="timeline-year">2020</span>
-          <span class="timeline-achievement">Musical Theatre Bristol Showcase</span>
-        </div>
+        <p class="timeline-year">2020</p>
+        <p class="timeline-achievement">Musical Theatre Bristol Showcase</p>
       </div>
 
       <div class="timeline-item" role="listitem">
-        <div class="timeline-card">
-          <span class="timeline-year">2021</span>
-          <span class="timeline-achievement">ICCA Finalists</span>
-        </div>
+        <p class="timeline-year">2021</p>
+        <p class="timeline-achievement">ICCA Finalists</p>
       </div>
 
       <div class="timeline-item" role="listitem">
-        <div class="timeline-card">
-          <span class="timeline-year">2022</span>
-          <span class="timeline-achievement">BA Music, University of Bristol</span>
-        </div>
+        <p class="timeline-year">2022</p>
+        <p class="timeline-achievement">BA Music, University of Bristol</p>
       </div>
 
       <div class="timeline-item" role="listitem">
-        <div class="timeline-card">
-          <span class="timeline-year">2022</span>
-          <span class="timeline-achievement">Musical Theatre Bristol Showcase</span>
-        </div>
+        <p class="timeline-year">2022</p>
+        <p class="timeline-achievement">Musical Theatre Bristol Showcase</p>
       </div>
 
       <div class="timeline-item" role="listitem">
-        <div class="timeline-card">
-          <span class="timeline-year">2024</span>
-          <span class="timeline-achievement">PGCE Music Education, University of Cambridge</span>
-        </div>
+        <p class="timeline-year">2024</p>
+        <p class="timeline-achievement">PGCE Music Education, University of Cambridge</p>
       </div>
 
       <div class="timeline-item" role="listitem">
-        <div class="timeline-card">
-          <span class="timeline-year">2026</span>
-          <span class="timeline-achievement">The Dolly Show</span>
-        </div>
+        <p class="timeline-year">2026</p>
+        <p class="timeline-achievement">The Dolly Show</p>
       </div>
 
     </div>
   </section>
+
+  <div class="divider" aria-hidden="true">✦ &nbsp; ✦ &nbsp; ✦</div>
 
   <!-- ────────────────────────────────
        5. CONTACT
@@ -676,6 +781,27 @@
   <footer>
     <p>&copy; 2026 Franny McGirr. All rights reserved.</p>
   </footer>
+
+  <script>
+    // YouTube facade: click thumbnail to swap in iframe
+    document.querySelectorAll('.video-wrapper[data-video-id]').forEach(function(wrapper) {
+      function activate() {
+        var id = wrapper.dataset.videoId;
+        var iframe = document.createElement('iframe');
+        iframe.src = 'https://www.youtube.com/embed/' + id + '?autoplay=1';
+        iframe.title = wrapper.querySelector('img').alt;
+        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+        iframe.allowFullscreen = true;
+        wrapper.innerHTML = '';
+        wrapper.appendChild(iframe);
+        wrapper.style.cursor = 'default';
+      }
+      wrapper.addEventListener('click', activate);
+      wrapper.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(); }
+      });
+    });
+  </script>
 
 </body>
 </html>
