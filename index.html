@@ -591,12 +591,12 @@
 
     <div class="video-grid">
       <!-- Video 1 -->
-      <div
+      <a
         class="video-wrapper"
-        data-video-id="JM70EzcVY6Y"
-        role="button"
-        tabindex="0"
-        aria-label="Play Franny McGirr performance video 1"
+        href="https://www.youtube.com/watch?v=JM70EzcVY6Y"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Watch Franny McGirr performance video 1 on YouTube"
       >
         <img
           class="yt-thumb"
@@ -609,15 +609,15 @@
             <polygon points="27,20 54,34 27,48" fill="#ffffff"/>
           </svg>
         </div>
-      </div>
+      </a>
 
       <!-- Video 2 -->
-      <div
+      <a
         class="video-wrapper"
-        data-video-id="mOD8z9UqfrY"
-        role="button"
-        tabindex="0"
-        aria-label="Play Franny McGirr performance video 2"
+        href="https://www.youtube.com/watch?v=mOD8z9UqfrY"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Watch Franny McGirr performance video 2 on YouTube"
       >
         <img
           class="yt-thumb"
@@ -630,7 +630,7 @@
             <polygon points="27,20 54,34 27,48" fill="#ffffff"/>
           </svg>
         </div>
-      </div>
+      </a>
     </div>
 
     <div class="performances-cta">
@@ -782,26 +782,6 @@
     <p>&copy; 2026 Franny McGirr. All rights reserved.</p>
   </footer>
 
-  <script>
-    // YouTube facade: click thumbnail to swap in iframe
-    document.querySelectorAll('.video-wrapper[data-video-id]').forEach(function(wrapper) {
-      function activate() {
-        var id = wrapper.dataset.videoId;
-        var iframe = document.createElement('iframe');
-        iframe.src = 'https://www.youtube.com/embed/' + id + '?autoplay=1';
-        iframe.title = wrapper.querySelector('img').alt;
-        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-        iframe.allowFullscreen = true;
-        wrapper.innerHTML = '';
-        wrapper.appendChild(iframe);
-        wrapper.style.cursor = 'default';
-      }
-      wrapper.addEventListener('click', activate);
-      wrapper.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(); }
-      });
-    });
-  </script>
 
 </body>
 </html>
